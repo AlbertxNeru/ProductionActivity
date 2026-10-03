@@ -50,12 +50,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 | You can simply get configs using config_item() function anywhere
 | My Configs:
 */
-$config['allow_origin'] = [
-    'http://localhost:5173',
-    'http://127.0.0.1:5173'
-];
+$frontend_origin = getenv('FRONTEND_URL') ?: '';
 
-$config['version'] = '4.6.0';
+$config['allow_origin'] = array_values(array_filter([
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    $frontend_origin,
+]));
 
 /*
 | -------------------------------------------------------------------
